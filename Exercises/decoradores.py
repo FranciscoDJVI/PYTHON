@@ -1,4 +1,4 @@
-# No need to import Credentials here, it will be passed as a parameter
+# No es necesario importar Credentials aquí, se pasará como un parámetro
 
 
 class Decorate:
