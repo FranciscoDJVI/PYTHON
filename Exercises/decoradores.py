@@ -1,16 +1,17 @@
-<<<<<<< HEAD
 # No need to import Credentials here, it will be passed as a parameter
+
 
 class Decorate:
     def __init__(self, credentials_instance):
         """
         Inicializa la clase Decorate con una instancia de Credentials.
-        
+
         Args:
             credentials_instance: Una instancia de la clase Credentials
                                  que contiene los datos de usuarios.
         """
         self.credentials = credentials_instance
+
     def sign_in(self):
         """
         Permite a un usuario iniciar sesión ingresando su nombre de usuario y contraseña.
@@ -25,7 +26,8 @@ class Decorate:
         Utiliza el método generate_user_db de la instancia de Credentials.
         """
         return self.credentials.generate_user_db()
-=======
+
+
 user: str = "admin"
 password: str = "1234"
 
@@ -84,4 +86,3 @@ def sign_in():
 # Ejecuta el flujo de autenticación cuando se ejecuta el scrip
 if __name__ == "__main__":
     sign_in()
->>>>>>> 9aaf41312618e2e2c80f89251d7038849df91af3
