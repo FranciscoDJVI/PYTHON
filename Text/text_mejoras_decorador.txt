@@ -1,0 +1,34 @@
+
+1. Reestructurar el proyecto:
+   • Dividir el código en archivos lógicos: 
+     - "credentials.py" para la clase Credentials y la lógica de usuarios.
+     - "decorators.py" para los decoradores mejorados.
+     - "main.py" o un módulo dedicado para la interfaz de usuario y la ejecución principal.
+
+2. Crear y usar la clase Credentials:
+   • Definir atributos para almacenar múltiples usuarios y contraseñas.
+   • Incluir métodos para:
+     - Agregar usuarios y contraseñas (encriptadas o mínimamente protegidas).
+     - Validar credenciales dadas (usuario y contraseña).
+   • Configurar un sistema que permita el registro de varios usuarios y sus contraseñas asociadas.
+
+3. Mejorar los decoradores:
+   • Rediseñar el decorador "authenticated" para que compruebe si el usuario está autenticado antes de ejecutar una función, o para omitir la ejecución si no lo está.
+   • Añadir un decorador "login_attempts" configurable para permitir un número de intentos definido (e.g., 3 intentos antes de bloquear).
+   • Incluir mensajes opcionales en español (por ejemplo, “Credenciales inválidas”, “Usuario bloqueado”, etc.), a fin de tener textos localizables.
+
+4. Añadir manejo de errores:
+   • Utilizar bloques try/except para capturar KeyboardInterrupt y evitar cierres abruptos del flujo de programa.
+   • Incluir validaciones de entrada de usuario (e.g., verificar que no se envíen strings vacíos) antes de procesar la autenticación.
+
+5. Mejoras generales y seguridad:
+   • Emplear la función getpass para ocultar la contraseña en los prompts.
+   • Implementar logging en lugar de simples prints para registrar con fecha y hora los intentos de login y posibles errores.
+   • Separar la interfaz de usuario (consola o GUI) de la lógica de autenticación, manteniéndolas en archivos o clases independientes para mayor claridad y testabilidad.
+
+6. Plan de implementación:
+   • Paso 1: Crear la clase Credentials y la lógica de almacenamiento y validación (credentials.py).
+   • Paso 2: Refactorizar los decoradores en el archivo decorators.py, añadiendo el control de intentos y mensajes en español.
+   • Paso 3: Ajustar la interacción con el usuario en main.py, usando getpass y tratando excepciones con elegancia.
+   • Paso 4: Integrar un sistema de logging que registre los accesos y errores en un archivo de log.
+   • Paso 5: Revisar y testear el flujo completo (registro de usuario, login, mensajes de usuario) y realizar ajustes finales.
