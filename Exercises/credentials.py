@@ -84,15 +84,15 @@ class Credentials:
         Permite a un usuario iniciar sesión ingresando su nombre de usuario y contraseña.
         Verifica si las credenciales ingresadas coinciden con alguna credencial guardada en users_db.
         """
-        username = input("Ingrese su nombre de usuario: ")
-        password = input("Ingrese su contraseña: ")
-
         # Verificar si users_db está vacío
         if not self.users_db:
             print(
                 "No hay usuarios registrados. Por favor, registre un usuario primero."
             )
             return False
+
+        username = input("Ingrese su nombre de usuario: ")
+        password = input("Ingrese su contraseña: ")
 
         # Recorrer users_db para encontrar credenciales coincidentes
         for user in self.users_db:
