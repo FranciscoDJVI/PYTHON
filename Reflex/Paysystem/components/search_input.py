@@ -1,7 +1,9 @@
 import reflex as rx
 from components.primary_button import primary_button
 
+# Clase para la gestion de prodcutos.
 class Products(rx.State):
+    # Lista de datos para mostar.
     data: list= [
         ["Laptop",1000, 10],
         ["Mouse", 20, 50],
@@ -14,24 +16,30 @@ class Products(rx.State):
         ["Tablet", 400, 5],
         ["Smartphone", 600, 10],
     ]
+    # Distribucion de las columnas donde se mostraran los datos guardados en data.
     columns: list[str] = ["nombre", "precio", "stock"]
     
+    # Variable que guarda el nombre del producto a buscar.
     search_query: str = ""
+    # Lista para guardar los datos encontrados.
     search_results: list = []
 
     prodcuts_cant: int = 0
 
+    # Funcion para la Busqueda de producto
     def search_product(self):
+        # Muesta en consola el producto con todos los items.
         print(f"Tipo de self.data: {type(self.data)}")
         if self.data and len(self.data) > 0:
             print(f"Ejemplo de un item: {self.data[0]}")
         
+        # Asignamos a la variable los items para mostar
+        # Recorremos la lista data para verificar si existe el producto.
         self.search_results = [
             {"nombre": item[0], "precio": item[1], "stock": item[2]}
             for item in self.data 
             if self.search_query.lower() in item[0].lower()
         ]
-
     def handle_submit(self, form_data):
         # Ejecutamos la búsqueda de productos con los criterios actuales
         self.search_product()
@@ -40,15 +48,8 @@ class Products(rx.State):
     def set_search_query(self, value):
         # Actualizamos la variable de estado con el nuevo valor del campo de búsqueda
         self.search_query = value
-
-    def handle_summit_addition_cant_product(self):
         
-        self.prodcuts_cant += 1
-    
-    def handle_summit_sustration_cant_product(self):
-        
-        self.prodcuts_cant -= 1
-
+# Funcion para renderizar y mostrar en pantalla los datos dentro de una tabla de datos.
 def table_products():
     return rx.form(
         rx.flex(
@@ -88,17 +89,19 @@ def table_products():
         on_submit=Products.handle_submit,
         ),
 
+# Class para la gestion de la cantidad de productos.
 class Quantity(rx.State):
     
     quantity: int = 0
     
+    # Funcion para incrementar de 1 en 1 el producto.
     def increment(self):
         self.quantity +=1
-    
+    # Funcion para decrementar de 1 en 1 el producto.
     def decrement(self):
         self.quantity -=1
         
-
+# Funcion para renderizar y mostar la cantidad de produtos escogidos en pantalla.
 def quantity():
     return rx.hstack(
         primary_button(
