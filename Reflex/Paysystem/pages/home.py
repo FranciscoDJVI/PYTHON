@@ -4,7 +4,7 @@ import reflex as rx
 from components.nabvar import nabvar
 from components.pay_buuton import pay_button
 from components.search_input import table_products
-
+from components.search_input import quantity
 
 from style.style import background as style
 
@@ -16,6 +16,9 @@ def home() -> rx.Component:
         rx.card(
             table_products(),
         ),
+        rx.card(
+            quantity()
+        ),  
         rx.hstack(
             pay_button("agregar pago")
         ),

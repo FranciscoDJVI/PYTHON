@@ -72,31 +72,12 @@ def table_products():
             justify="center",
             align="center",
         ),
-        rx.form(
-                rx.card(
-                    rx.data_table(
-                        columns=Products.columns,
-                        data=Products.search_results,            
-                        resizable=True,                       
-                        ),
-                        rx.card(
-                            primary_button("-", type="submit"),
-                        ),
-                        on_submit=Products.handle_summit_sustration_cant_product,
-                    ),
-                        rx.card(
-                            rx.input(
-                            placeholder="Cantidad",
-                            variant="classic",
-                            width="100hv",
-                            value=Products.prodcuts_cant,
-                            on_change=Products.set_prodcuts_cant,
-                            ),
-                        ),
-                        rx.card(
-                            primary_button("+", type="submit"),
-                        ),
-                        on_submit=Products.handle_summit_addition_cant_product,
+        rx.card(
+            rx.data_table(
+                columns=Products.columns,
+                data=Products.search_results,            
+                resizable=True,                       
+            ),
         ),
             spacing="2",
             direction="column",
@@ -105,4 +86,30 @@ def table_products():
             flex_wrap=True,
             
         on_submit=Products.handle_submit,
-        )
+        ),
+
+class Quantity(rx.State):
+    
+    quantity: int = 0
+    
+    def increment(self):
+        self.quantity +=1
+    
+    def decrement(self):
+        self.quantity -=1
+        
+
+def quantity():
+    return rx.hstack(
+        primary_button(
+            "-",
+            "submit",
+            Quantity.decrement),
+        rx.heading(Quantity.quantity),
+        primary_button(
+            "+",
+            "submit",
+            Quantity.increment
+        ),
+        spacing="4"
+    )

@@ -1,9 +1,10 @@
 import reflex as rx
 
 
-def primary_button(title: str, type: str) -> rx.Component:
+def primary_button(title: str, type: str, action) -> rx.Component:
     return rx.button(
         title,
-        variant="classic",
+        variant="surface",
         type=type,
+        on_click=action
     )
