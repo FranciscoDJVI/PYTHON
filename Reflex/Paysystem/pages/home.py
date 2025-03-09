@@ -3,9 +3,8 @@ import reflex as rx
 # Components
 from components.nabvar import nabvar
 from components.pay_buuton import pay_button
-from components.search_input import table_products
-from components.search_input import quantity
-
+from components.search_input import foreache_ex
+#from components.search_input import input_search_products
 from style.style import background as style
 
 
@@ -13,12 +12,12 @@ from style.style import background as style
 def home() -> rx.Component:
     return rx.container(
         nabvar("Bienvenido a la pagina Principal"),
+        """rx.card(
+            input_search_products()
+        ),""",
         rx.card(
-            table_products(),
+            foreache_ex(),
         ),
-        rx.card(
-            quantity()
-        ),  
         rx.hstack(
             pay_button("agregar pago")
         ),

@@ -1,6 +1,53 @@
 import reflex as rx
 from components.primary_button import primary_button
 
+
+class Producst(rx.State):
+    
+    data: list[dict]= [
+        {"id":1,"nombre":"Laptop","precio": 1000, "stock":10},
+        {"id":2,"nombre":"Mouse","precio": 1000, "stock":10},
+        {"id":3,"nombre":"Teclado","precio": 1000, "stock":10},
+        {"id":4,"nombre":"Monitor","precio": 1000, "stock":10},
+        {"id":5,"nombre":"Ups","precio": 1000, "stock":10},
+    ]
+
+    columns: list[str] = ["id", "nombre", "precio", "stock"]
+
+    individual_item: list = []
+    
+    def search_items(self):
+        
+        for item in self.data:
+            self.individual_item = [{"id": item["id"],"nombre": item["nombre"],"precio": item["precio"],"stock": item["stock"],}]
+        
+            print(self.individual_item)
+    
+def views_data(item: str):
+    return rx.box(
+        rx.text(item),
+    )
+
+def foreache_ex():
+    return rx.grid(
+        rx.input(
+            placeholder="buscar",
+            value=Producst.search_items
+        ),
+        rx.card(
+            primary_button("buscar", "submit", Producst.search_items)
+        ),
+        rx.data_table(
+            data=Producst.data,
+            columns=Producst.columns
+        )
+    )
+
+
+
+
+
+"""
 # Clase para la gestion de prodcutos.
 class Products(rx.State):
     # Lista de datos para mostar.
@@ -13,18 +60,15 @@ class Products(rx.State):
         ["Cargador", 30, 40],
         ["Mochila", 50, 25],
         ["Impresora", 200, 10],
-        ["Tablet", 400, 5],
+        ["Tablet", 400,2000,5],
         ["Smartphone", 600, 10],
     ]
-    # Distribucion de las columnas donde se mostraran los datos guardados en data.
+    # Distribucion de las columnas donde se mostrarán los datos guardados en data.
     columns: list[str] = ["nombre", "precio", "stock"]
-    
     # Variable que guarda el nombre del producto a buscar.
     search_query: str = ""
     # Lista para guardar los datos encontrados.
     search_results: list = []
-
-    prodcuts_cant: int = 0
 
     # Funcion para la Busqueda de producto
     def search_product(self):
@@ -40,6 +84,9 @@ class Products(rx.State):
             for item in self.data 
             if self.search_query.lower() in item[0].lower()
         ]
+        
+        return self.search_product
+    
     def handle_submit(self, form_data):
         # Ejecutamos la búsqueda de productos con los criterios actuales
         self.search_product()
@@ -116,3 +163,23 @@ def quantity():
         ),
         spacing="4"
     )
+
+class AddProdcut(rx.State):
+    
+    view_data: list = Products.search_results
+    
+    view_quantity: int = Quantity.quantity
+    
+    columns: list[str]=["nombre", "precio", "stock", "cantidad"]
+    
+    
+def views_items():
+    return rx.data_table(
+        data = Products.data.append({"cantidad": Quantity.quantity})
+    )
+
+def add_products():
+    return rx.form(
+        rx.foreach (AddProdcut.view_data, views_items),
+        primary_button("agregar prodcuto", "submit", AddProdcut.,
+    )"""
