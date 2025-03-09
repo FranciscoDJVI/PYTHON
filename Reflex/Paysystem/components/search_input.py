@@ -14,7 +14,9 @@ class Producst(rx.State):
 
     columns: list[str] = ["id", "nombre", "precio", "stock"]
 
-    individual_item: list = []
+    individual_item: str =""
+    
+    search_result: str = []
     
     def search_items(self):
         
@@ -32,7 +34,8 @@ def foreache_ex():
     return rx.grid(
         rx.input(
             placeholder="buscar",
-            value=Producst.search_items
+            value=Producst.individual_item,
+            on_cahnge=Producst.set_individual_item,
         ),
         rx.card(
             primary_button("buscar", "submit", Producst.search_items)
