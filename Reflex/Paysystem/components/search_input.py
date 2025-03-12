@@ -3,7 +3,7 @@ import reflex as rx
 # Componentes
 from components.primary_button import primary_button
 
-
+# Clase que contine los productos y los metodos para buscar los productos.
 class Producst(rx.State):
     
     data: list[str] = [
@@ -14,11 +14,16 @@ class Producst(rx.State):
 
     columns: list[str] = ["id", "nombre", "precio", "stock"]
 
+    columns_quatity: list[str] = ["id", "nombre", "precio", "stock", "cantidad"]
     # Varible para gaurdar la informacion escrita en el input
     search_query: str = ""
 
     # lista donde se guardaran los datos para mostrar.
     search_result: list[dict]=[]
+    
+    search_result_with_quantity: list[dict]=[]
+    
+    list_producst: list[dict]=[]
 
     @rx.event
     def view(self):
@@ -28,10 +33,35 @@ class Producst(rx.State):
             for item in self.data
             if self.search_query.lower() in str(item[1].lower())
         ]
-        print(self.search_result)
+        print(f"Productos individuales {self.search_result}")
         
     def handle_summit(self, form_data:dict):
         self.search_query = form_data["search_query"]
+    
+    quantity: int=0
+    
+    def increment(self):
+        self.quantity +=1
+    
+    def decremet(self):
+        self.quantity -=1
+        
+    def handle_quantity(self, quantity_final: int):
+        
+        self.quantity = quantity_final
+
+    def view_prodcuts_wwith_quantity(self):
+        
+        self.search_result_with_quantity = [
+            {"id":item[0],"nombre":item[1], "precio":item[2], "stock":item[3], "cantidad":self.quantity}
+            for item in self.data
+            if self.search_query.lower() in str(item[1].lower())
+        ]           
+        print(f" Lista de productos: {self.search_result_with_quantity}")
+        
+    def list_prod(self):
+        self.list_producst.append(self.search_result_with_quantity)
+        print(self.list_producst)
         
 def search() ->rx.Component:
     return rx.form(
@@ -52,6 +82,23 @@ def search() ->rx.Component:
                 rx.data_table(
                     data=Producst.search_result,
                     columns=Producst.columns,
+                )
+            ),
+            rx.card(        
+                primary_button("+", "submit", Producst.increment),
+                rx.heading(Producst.quantity),
+                primary_button("-", "submit", Producst.decremet),
+                ),
+            rx.card(
+                primary_button("listar", "submit", Producst.view_prodcuts_wwith_quantity)
+            ),
+            rx.card(
+                primary_button("agregar producto", "submit", Producst.list_prod)
+            ),
+            rx.card(
+                rx.data_table(
+                    data=Producst.list_producst,
+                    columns=Producst.columns_quatity,
                 )
             ),
             spacing="4",
