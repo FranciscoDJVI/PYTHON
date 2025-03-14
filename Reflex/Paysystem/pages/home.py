@@ -3,7 +3,7 @@ import reflex as rx
 # Components
 from components.nabvar import nabvar
 from components.pay_buuton import pay_button
-from components.search_input import search
+from components.search_input import view_products_data
 from style.style import background as style
 
 
@@ -12,7 +12,7 @@ def home() -> rx.Component:
     return rx.container(
         nabvar("PasySistem"),
         rx.card(
-            search(),
+            view_products_data(),
         ),
     )
 
