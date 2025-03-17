@@ -4,7 +4,8 @@ from django.db import models
 from django.utils import timezone
 
 
-# Create your models here.
+# here create models for database sqlite
+# table Question.
 class Question(models.Model):
     def __str__(self):
         return self.question_text
@@ -16,7 +17,7 @@ class Question(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
-
+# table Choice.
 class Choice(models.Model):
     def __str__(self):
         return self.choice_text

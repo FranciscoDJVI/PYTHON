@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+# Add urls direcction for diferents views in the project.
 app_name = "polls"
 urlpatterns = [
     # ex: /polls/
