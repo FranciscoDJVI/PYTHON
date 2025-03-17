@@ -23,7 +23,7 @@ class IndexView(generic.ListView):
         those set to be
         published in the future).
         """
-        Question.objects.filter(pub_date__lte=timezone.now().order_by("-pub_date")[:5])
+        Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
 
 
 class DetailView(generic.DateDetailView):
