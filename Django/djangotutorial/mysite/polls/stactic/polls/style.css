@@ -1,4 +1,10 @@
+body {
+    background: image( url("/mysite/polls/stactic/polls/images/background.png") no-repeat);
+}
+
 
 li a {
     color: green;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
