@@ -1,0 +1,12 @@
+<form action="{% url 'paysystem_app:detail' detail_product.id_product%}" method="post">
+{% crsf_token %}
+<fieldset>
+    <p>Id product {{ detail_product.id_product}}</p>
+    <legend><h1> detail_product.name_product</h1></legend>
+    <ul>
+        <li>{{ detail_product.price_product}}</li>
+        <li><{{detail_product.srock_product}}/li>
+    </ul>
+</fieldset>
+
+</form>
